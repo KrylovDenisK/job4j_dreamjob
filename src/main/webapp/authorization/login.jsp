@@ -38,7 +38,10 @@
                        <label for="pass">Пароль</label>
                        <input type="text" class="form-control" id="pass" name="password">
                    </div>
-                   <button type="submit" class="btn btn-primary">Войти</button>
+                   <div class="form-group">
+                       <button type="submit" class="btn btn-primary">Войти</button>
+                       <a href="<%=request.getContextPath()%>/reg.do">Регистрация</a>
+                   </div>
                </form>
             </div>
         </div>
