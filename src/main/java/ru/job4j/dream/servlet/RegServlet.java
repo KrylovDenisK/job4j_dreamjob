@@ -25,7 +25,7 @@ public class RegServlet extends HttpServlet {
                         req.getParameter("email"),
                         req.getParameter("password")
         ));
-        if (user.getPassword().equals("")) {
+        if (user != null) {
             HttpSession sc = req.getSession();
             sc.setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/posts.do");

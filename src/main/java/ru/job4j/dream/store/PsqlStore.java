@@ -86,6 +86,27 @@ public class PsqlStore implements Store {
     }
 
     @Override
+    public Collection<User> findAllUsers() {
+        List<User> users = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement("SELECT * FROM users")) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    users.add(new User(
+                            it.getInt("id"),
+                            it.getString("name"),
+                            it.getString("email"),
+                            it.getString("password"))
+                    );
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    @Override
     public void savePost(Post post) {
          if (post.getId() == 0) {
             createPost(post);
@@ -226,9 +247,6 @@ public class PsqlStore implements Store {
             result = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        if (result > 0) {
-            user.setPassword("");
         }
         return user;
     }
