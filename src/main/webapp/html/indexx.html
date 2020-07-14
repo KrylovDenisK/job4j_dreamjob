@@ -7,6 +7,17 @@
 		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		  <script>
+			  function validate() {
+			  	let check = [$('#fName'), $('#lName'), $('#email'), $('#desc')];
+			  	for (var i = check.length - 1; i >= 0; i--) {
+			  		if (check[i].val() == "") {
+			  			alert(check[i].attr('title'));
+			  		}
+			  	}
+			  	return false;
+			  }
+		  </script>
 	</head>
 <body>
 	<div class="container">
@@ -15,17 +26,17 @@
 		    <div class="row">
 		    	<div class="col-md-6">
 		    		<label for="fName">First name</label>
-		    		<input type="text" class="form-control" id="fName" name="fName" placeholder="First Name">
+		    		<input type="text" class="form-control" id="fName" name="fName" title="Enter first name" placeholder="First Name">
 		    	</div>
 		    	<div class="col-md-6">
 		    		<label for="LName">Last name</label>
-		    		<input type="text" class="form-control" id="lName" name="lName" placeholder="Last Name">
+		    		<input type="text" class="form-control" id="lName" name="lName" title="Enter last name" placeholder="Last Name">
 		    	</div>
 		    </div>
 		    <div class="row">
 		    	<div class="col-md-12">
 			    	<label for="gender">Gender</label>
-			    	<select class="form-control" id="gender" name="gender">
+			    	<select class="form-control" id="gender" name="gender" title="Enter gender">
 			    		<option>Men</option>
 			    		<option>Woman</option>
 			    	</select>
@@ -34,18 +45,18 @@
 			 <div class="row">
 		    	<div class="col-md-12">
 		    		<label for="email">Email</label>
-		    		<input type="Email" class="form-control" id="email" name="email" placeholder="Email">
+		    		<input type="Email" class="form-control" id="email" name="email" title="Enter email" placeholder="Email">
 		    	</div>
 		    </div>
 			<div class="row">
 		    	<div class="col-md-12">
 			    	<label for="desc">Description</label>
-			    	<textarea class="form-control" rows="10" cols="45" id="desc" name="desc"></textarea>
+			    	<textarea class="form-control" rows="10" cols="45" id="desc" name="desc" title="Enter description"></textarea>
 		   		</div>
 		  	</div>
 		  	<div class="row">
 		    	<div class="col-md-2">
-					<br><button class="form-control" type="submit" name="send">Send</button>
+					<br><button class="form-control" type="submit" name="send" onclick="return validate();">Send</button>
 		   		</div>
 		  	</div>
 		  </div>
