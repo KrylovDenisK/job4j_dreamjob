@@ -17,6 +17,15 @@
 			  	}
 			  	return false;
 			  }
+
+			  function rowAdd() {
+			  	$('#table tr:last')
+			  		.after('<tr><td>' + $('#fName').val() +'</td><td>'
+			  			+ $('#lName').val() + '</td><td>' 
+			  			+ $('#gender').val() + '</td><td>' 
+			  			+ $('#email').val() + '</td><td>' 
+			  			+ $('#desc').val() + '</td></tr>');
+			  }
 		  </script>
 	</head>
 <body>
@@ -62,7 +71,7 @@
 		  </div>
 		</form>
 		<br>
-		<table class="table table-bordered">
+		<table class="table table-bordered" id="table">
 		    <thead>
 		      <tr>
 		        <th>First name</th>
@@ -73,15 +82,13 @@
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr>
-		        <td>-</td>
-		        <td>-</td>
-		        <td>-</td>
-		        <td>-</td>
-		        <td>-</td>
-		      </tr>
 		    </tbody>
 		</table>
+		<div class="row">
+		    	<div class="col-md-2">
+					<button class="form-control" type="submit" name="add" onclick="rowAdd();">Add row</button>
+		   		</div>
+		</div>
 	</div>
 </body>
 </html>
