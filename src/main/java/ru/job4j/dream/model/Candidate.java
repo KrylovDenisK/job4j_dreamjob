@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Candidate {
     private int id;
     private String name;
+    private int idCity;
 
     public Candidate(int id, String name) {
         this.id = id;
@@ -17,6 +18,14 @@ public class Candidate {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdCity() {
+        return idCity;
+    }
+
+    public void setIdCity(int idCity) {
+        this.idCity = idCity;
     }
 
     public String getName() {

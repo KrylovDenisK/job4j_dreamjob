@@ -16,7 +16,8 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Регистрация</title>
+    <script src="<%=request.getContextPath()%>/scripts/validate.js"> </script>
+    <title>Регистрация пользователя</title>
 </head>
 <body>
 <div class="container pt-3">
@@ -26,10 +27,10 @@
                 Новый пользователь
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/reg.do" method="post">
+                <form onsubmit="return validate([$('#login'), $('#mail'), $('#pass')])" action="<%=request.getContextPath()%>/reg.do" method="post">
                     <div class="form-group">
-                        <label for="name">Логин</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <label for="login">Логин</label>
+                        <input type="text" class="form-control" id="login" name="name">
                     </div>
                     <div class="form-group">
                         <label for="mail">Почта</label>

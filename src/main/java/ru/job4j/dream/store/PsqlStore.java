@@ -250,4 +250,20 @@ public class PsqlStore implements Store {
         }
         return user;
     }
+
+    @Override
+    public List<String> getCities() {
+        List<String> result = new ArrayList<>();
+        try (Connection connection = pool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select name from city")) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    result.add(resultSet.getString("name"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

@@ -18,7 +18,8 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Работа мечты</title>
+    <script src="<%=request.getContextPath()%>/scripts/validate.js"> </script>
+    <title>Войти в систему</title>
 </head>
 <body>
 
@@ -29,14 +30,14 @@
                 Авторизация
             </div>
             <div class="card-body">
-               <form action="<%=request.getContextPath()%>/auth.do" method="post">
+               <form onsubmit="return validate([$('#mail'), $('#pass')])" action="<%=request.getContextPath()%>/auth.do" method="post">
                    <div class="form-group">
                        <label for="mail">Почта</label>
-                       <input type="text" class="form-control" id="mail" name="email">
+                       <input type="text" class="form-control" id="mail" name="email" title="Enter email">
                    </div>
                    <div class="form-group">
                        <label for="pass">Пароль</label>
-                       <input type="text" class="form-control" id="pass" name="password">
+                       <input type="text" class="form-control" id="pass" name="password" title="Enter password">
                    </div>
                    <div class="form-group">
                        <button type="submit" class="btn btn-primary">Войти</button>
