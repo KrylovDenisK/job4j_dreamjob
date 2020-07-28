@@ -15,17 +15,18 @@
     <script src="<%=request.getContextPath()%>/scripts/validate.js"> </script>
     <script>
        function loadCity() {
-            $.ajax({
-                type: 'POST',
-                url:  'http://localhost:8080/dreamjob/city',
-                dataType: 'json'
-            }).done(function(data) {
-                $.each(data.cities, function(index, value) {
-                    $('#city').append('<option value="'+ value +'">' + value + '</option>')
-                })
-            }).fail(function(err){
-                alert(err);
-            });
+               $.ajax({
+                   type: 'GET',
+                   url:  'http://localhost:8080/dreamjob/city',
+                   dataType: 'json'
+               }).done(function(data) {
+                   $.each(data.cities, function(index, value) {
+                       $('#city').append('<option value="'+ value.id +'">' + value.name + '</option>')
+                   });
+                   $('#city').val(new URLSearchParams(window.location.search).get("idCity"));
+               }).fail(function(err){
+                   alert(err);
+               });
         }
     </script>
     <title>Кандидаты</title>
@@ -37,6 +38,7 @@
     if (id != null) {
         can = PsqlStore.instOf().findCandidateById(Integer.valueOf(id));
     }
+
 %>
 <div class="container pt-3">
     <div class="row">
@@ -58,7 +60,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="city">Город</label>
-                                <select class="form-control" id="city">
+                                <select class="form-control" id="city" name="city">
                                     <option disabled>Выберите город</option>
                                 </select>
                             </div>

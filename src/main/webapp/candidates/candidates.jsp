@@ -54,7 +54,7 @@
                     <c:forEach items="${candidates}" var="cand">
                         <tr>
                             <td>
-                                <a href='<c:url value="/candidates/edit.jsp?id=${cand.id}"/>'>
+                                <a href='<c:url value="/candidates/edit.jsp?id=${cand.id}&idCity=${cand.idCity}"/>'>
                                     <i class="fa fa-edit mr-3"></i>
                                 </a>
                                 <c:out value="${cand.name}"/>

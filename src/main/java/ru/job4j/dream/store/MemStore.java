@@ -1,6 +1,7 @@
 package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
 import java.util.Collection;
@@ -75,7 +76,7 @@ public class MemStore implements Store {
     }
 
     @Override
-    public List<String> getCities() {
+    public List<City> getCities() {
         return null;
     }
 }

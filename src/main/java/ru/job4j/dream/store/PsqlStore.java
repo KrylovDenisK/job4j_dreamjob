@@ -2,6 +2,7 @@ package ru.job4j.dream.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
 
@@ -75,7 +76,8 @@ public class PsqlStore implements Store {
                 while (it.next()) {
                     candidates.add(new Candidate(
                             it.getInt("id"),
-                            it.getString("name"))
+                            it.getString("name"),
+                            it.getInt("idcity"))
                     );
                 }
             }
@@ -153,8 +155,9 @@ public class PsqlStore implements Store {
 
     private Candidate createCandidate(Candidate candidate) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidate(name) VALUES (?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidate(name, idcity) VALUES (?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, candidate.getName());
+            ps.setInt(2, candidate.getIdCity());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -169,9 +172,10 @@ public class PsqlStore implements Store {
 
     private void updateCandidate(Candidate candidate) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement("update candidate set name = ? where id = ?")) {
+             PreparedStatement ps =  cn.prepareStatement("update candidate set name = ?, idcity = ? where id = ?")) {
             ps.setString(1, candidate.getName());
-            ps.setInt(2, candidate.getId());
+            ps.setInt(2, candidate.getIdCity());
+            ps.setInt(3, candidate.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -202,13 +206,14 @@ public class PsqlStore implements Store {
     public Candidate findCandidateById(int id) {
         Candidate candidate = null;
         try (Connection connect = pool.getConnection();
-             PreparedStatement preparedStatement = connect.prepareStatement("SELECT id, name from candidate where id = ?")) {
+             PreparedStatement preparedStatement = connect.prepareStatement("SELECT id, name, idcity from candidate where id = ?")) {
             preparedStatement.setInt(1, id);
             try (ResultSet result = preparedStatement.executeQuery()) {
                 while (result.next()) {
                     candidate = new Candidate(
                             result.getInt("id"),
-                            result.getString("name")
+                            result.getString("name"),
+                            result.getInt("idcity")
                     );
                 }
             }
@@ -252,13 +257,18 @@ public class PsqlStore implements Store {
     }
 
     @Override
-    public List<String> getCities() {
-        List<String> result = new ArrayList<>();
+    public List<City> getCities() {
+        List<City> result = new ArrayList<>();
         try (Connection connection = pool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select name from city")) {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from city")) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    result.add(resultSet.getString("name"));
+                    result.add(
+                            new City(
+                                    resultSet.getInt("id"),
+                                    resultSet.getString("name")
+                            )
+                    );
                 }
             }
         } catch (Exception e) {
