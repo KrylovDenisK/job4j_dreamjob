@@ -23,5 +23,5 @@ CREATE TABLE if not exists candidate (
   name character varying(100),
   idcity integer,
   PRIMARY KEY (id),
-  foreign key ("idCity") references city ("id")
+  foreign key ("idcity") references city ("id")
 );
