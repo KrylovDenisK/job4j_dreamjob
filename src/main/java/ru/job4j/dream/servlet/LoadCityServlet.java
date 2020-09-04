@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import ru.job4j.dream.store.PsqlStore;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
