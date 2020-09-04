@@ -31,7 +31,7 @@ public class RegServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/posts.do");
         } else {
             req.setAttribute("error", "Неверный логин или пароль");
-            req.getRequestDispatcher("/authorization/login.jsp").forward(req,resp);
+            req.getRequestDispatcher("/authorization/login.jsp").forward(req, resp);
         }
     }
 }
